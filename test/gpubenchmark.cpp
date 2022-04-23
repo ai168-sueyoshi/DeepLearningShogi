@@ -10,7 +10,9 @@ using namespace std;
 // GPUベンチマーク
 #include "nn.h"
 #include "nn_wideresnet10.h"
+#include "nn_wideresnet5.h"
 #include "nn_fused_wideresnet10.h"
+#include "nn_fused_wideresnet5.h"
 #include "nn_wideresnet15.h"
 #include "nn_senet10.h"
 #include "nn_tensorrt.h"
@@ -69,11 +71,17 @@ int main(int argc, char* argv[]) {
 	else if (model_path.find("fused_wideresnet10") != std::string::npos) {
 		nn.reset((NN*)new NNFusedWideResnet10(batchsize));
 	}
+	else if (model_path.find("fused_wideresnet5") != std::string::npos) {
+		nn.reset((NN*)new NNFusedWideResnet5(batchsize));
+	}
 	else if (model_path.find("wideresnet15") != std::string::npos) {
 		nn.reset((NN*)new NNWideResnet15(batchsize));
 	}
 	else if (model_path.find("senet10") != std::string::npos) {
 		nn.reset((NN*)new NNSENet10(batchsize));
+	}
+	else if (model_path.find("nn_wideresnet5") != std::string::npos) {
+		nn.reset((NN*)new NNWideResnet5(batchsize));
 	}
 	else {
 		nn.reset((NN*)new NNWideResnet10(batchsize));
