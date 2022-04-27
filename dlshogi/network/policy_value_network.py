@@ -8,6 +8,8 @@ def policy_value_network(network, add_sigmoid=False):
         from dlshogi.network.policy_value_network_wideresnet10 import PolicyValueNetwork
     elif network == 'wideresnet5':
         from dlshogi.network.policy_value_network_wideresnet5 import PolicyValueNetwork
+    elif network == 'wideresnet5_swish':
+        from dlshogi.network.policy_value_network_wideresnet5_swish import PolicyValueNetwork
     elif network == 'resnet10_swish':
         from dlshogi.network.policy_value_network_resnet10_swish import PolicyValueNetwork
     elif network[:6] == 'resnet':
@@ -34,7 +36,7 @@ def policy_value_network(network, add_sigmoid=False):
 
         PolicyValueNetwork = PolicyValueNetworkAddSigmoid
 
-    if network in [ 'wideresnet5', 'wideresnet10', 'resnet10_swish' ]:
+    if network in [ 'wideresnet5', 'wideresnet5_swish', 'wideresnet10', 'resnet10_swish' ]:
         return PolicyValueNetwork()
     elif network[:6] == 'resnet' or network[:5] == 'senet':
         m = re.match('^(resnet|senet)(\d+)(x\d+){0,1}(_fcl\d+){0,1}(_reduction\d+){0,1}(_.+){0,1}$', network)
